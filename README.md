@@ -1,3 +1,5 @@
+<img width="150" height="150" alt="1_UR6gxnrCBs7ra72J0UqLRg" src="https://github.com/user-attachments/assets/d94a2d2f-804f-40b6-85ac-cba7bda4d3e8" />
+
 # Case Study: How does a bike-share navigate speedy success?
   ## Introduction:
   Huy Nguyen performed the Cyclistic bike-share analysis case study in December 2025 as a capstone for the Google Data Analytics Certificate. In this case study, I work for a fictonal company, along with the marketing analytics team. This Analysis follow the data analysis process: ASK, PREPARE, PROCESS, ANALYZE, SHARE, ACT and used both SQL and Tableau to answer key business questions and develop data-drive recommendations between January and December in 2024.
@@ -10,9 +12,9 @@
   members. But first, Cyclistic executives must approve your recommendations, so they must be
   backed up with compelling data insights and professional data visualizations.
   ## Quick Link:
-  ### Data Source:
-  ### SQL Code:
-  ### Visualization: 
+  ##### Data Source: https://divvy-tripdata.s3.amazonaws.com/index.html
+  ##### SQL Code: https://github.com/minhhuy2112006/Cyclistic_Bike_Share_Analysis
+  ##### Visualization: https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
   ## Description:
 
   ## Ask:
