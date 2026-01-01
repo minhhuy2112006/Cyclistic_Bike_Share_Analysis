@@ -16,7 +16,20 @@
   ##### SQL Code: https://github.com/minhhuy2112006/Cyclistic_Bike_Share_Analysis
   ##### Visualization: https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
   ## Description:
+  #### About company:
+  In 2016, Cylistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5.824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
+  ##### Cyclistic sets itself apart by offering:
 
+  - Classic bike
+  - Electric bike
+  - Electric scooter
+  
+  #### User types:
+  - **Casual riders**: Customers who purchase single-ride or full-day passes
+  - **Annual members**: Customers who purchase annual memberships
+
+  #### Business Context:
+  Cyclistic's finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, the director of marketing (Lily Moreno) believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a solid opportunity to convert casual riders into members since casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.
   ## Ask:
   ### Problem:
   ### Business Task:
