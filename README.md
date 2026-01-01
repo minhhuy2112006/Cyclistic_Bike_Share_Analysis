@@ -53,13 +53,42 @@
      
   ##### Stakeholder:
 
-  - **Lily Moreno:**Director of Marketing, responsible for campaign development and promotional initiatives.
-  - **Cyclistic Marketing Analytics Team:**Data analysts responsible for collecting, analyzing, and reporting data to guide marketing strategy. 
-  - **Cyclistic Executive Team:**Detail-oriented team that will approve the recommended marketing program.
+  - **Lily Moreno:** Director of Marketing, responsible for campaign development and promotional initiatives.
+  - **Cyclistic Marketing Analytics Team:** Data analysts responsible for collecting, analyzing, and reporting data to guide marketing strategy. 
+  - **Cyclistic Executive Team:** Detail-oriented team that will approve the recommended marketing program.
 
   ### 2. Prepare:
-  #### Describe Data Source:
+  
+  #### Data Source Description:
+  **Dataset:** Cyclistic trip data for the full year 2024 (January - December).
+  **Source:** Divvy Bikes (Operated by Lyft), publicly available.
+  **Format:** 12 CSV Files (one per month), containing ride-level data.
+  
+  **Key Fields:**
+  - `ride_id`: Unique identifier for each trip.
+  - `rideable_type`: Type of bike (classic_bike, electric_bike, electric_scooter)
+  - `start_at`, `end_at`: Timestamp of trip start and end
+  - `start_station_name` , `start_station_id`: Starting station information
+  - `end_station_name` , `end_station_id`: Ending station information
+  - `start_lat` , `start_lng` , `end_lat` , `end_lng`: Geographic coordinates
+  - `member_casual`: User type (member or casual) 
+  
+  ##### Data Credibility (ROCCC):
+  - **Reliable:** First-party data collected directly from Cyclistic's bike-share system
+  - **Original:** Primary source data from actual bike trips.
+  - **Comprehensive:** Contains 5.67+ million trip records covering all of 2024. 
+  - **Current:** Most recent full-year dataset available (2024).
+  - **Cited:** Published by Motivate International Inc. under appropriate license.
+
+  ##### Limitations:
+  - Missing station information for some trips (resolved through coordinate-based imputation).
+  - No demographics data about riders (age, gender, location).
+  - No pricing or revenue information.
+  - Data privacy restrictions prevent identifying individual users.
+  
   #### License
+  The data has been made available by Motivate International Inc. under this https://divvybikes.com/data-license-agreement
+  
   ### 3. Process:
   ### 4. Analyze:
   ### 5. Share:
