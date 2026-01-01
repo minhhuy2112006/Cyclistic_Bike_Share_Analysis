@@ -1,5 +1,6 @@
 # Case Study: How does a bike-share navigate speedy success?
   ## Introduction:
+  Huy Nguyen performed the Cyclistic bike-share analysis case study in December 2025 as a capstone for the Google Data Analytics Certificate. In this case study, I work for a fictonal company, along with the marketing analytics team. This Analysis follow the data analysis process: ASK, PREPARE, PROCESS, ANALYZE, SHARE, ACT and used both SQL and Tableau to answer key business questions and develop data-drive recommendations between January and December in 2024.
   ## Scenario:
   You are a junior data analyst working on the marketing analyst team at Cyclistic, a bike-share
   company in Chicago. The director of marketing believes the company’s future success
