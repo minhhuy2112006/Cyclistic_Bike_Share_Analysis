@@ -159,7 +159,7 @@ DROP TABLE #files;
   ```
   
   **3. Data Cleaning**
-
+	In the SQL Query File database_cyclistic:
   **Reference Tables:** 
   Created tables to support handling missing values
 
@@ -236,8 +236,10 @@ DROP TABLE #files;
   )
   DELETE FROM outlier
   ```
-  **4. Feature Engineering**
-     
+  **Final Dataset:** `cleaned_trips` table with 5,674,282 valid trip records
+  
   ### 4. Analyze:
+  **Key Findings**
+  
   ### 5. Share:
   ### 6. Act:
