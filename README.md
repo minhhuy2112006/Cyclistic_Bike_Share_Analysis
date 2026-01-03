@@ -251,7 +251,133 @@ DROP TABLE #files;
   FROM cleaned_trips
   GROUP BY member_casual
   ```
-  ****
+  While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
+  **Ride Duration Pattern:**
+  ```sql
+  -- Average and median ride duration by user type
+-- Duration Table
+WITH durations AS (
+	SELECT member_casual, 
+		   DATEDIFF(MINUTE, start_at, end_at) AS duration
+	FROM cleaned_trips
+),
+-- Average durations table
+avg_table AS (
+	SELECT member_casual,
+		   AVG(duration) AS avg_duration
+	FROM durations
+	GROUP by member_casual
+),
+-- Median durations table
+median_table AS (
+	SELECT DISTINCT member_casual,
+		   PERCENTILE_CONT(0.5)
+		   WITHIN GROUP (ORDER BY duration)
+		   OVER (PARTITION BY member_casual) AS median_duration
+	FROM durations
+)
 
+SELECT a.member_casual,
+	   a.avg_duration,
+	   m.median_duration
+FROM avg_table as a
+JOIN median_table as m
+ON a.member_casual = m.member_casual
+  ```
+  **Result:**
+  
+  <img width="511" height="98" alt="image" src="https://github.com/user-attachments/assets/28f0ef7f-5496-462d-b01f-1dd3b353c14e" />
+  
+  --> Casual riders take loger trips (average: 21m, median: 13m) reflecting more leisure-oriented behavior. In constrast, members have shorter and more consistent ride durations (average: 12m, median: 9m) indicating frequent, purpose-driven usage.
+  **Peak Usage Times**
+  ```sql
+WITH hourly_counts AS (
+-- 1. Calculate the total rides per hour for each rider type
+	SELECT DATEPART(HOUR,start_at) AS hour_of_days,
+		   member_casual,
+		   COUNT(*) AS total_ride_hours
+	FROM cleaned_trips
+	GROUP BY DATEPART(HOUR,start_at),
+			 member_casual
+),
+ranked_hours as (
+-- 2. Rank the hours within each rider type based on total_rides (descending)
+	SELECT *,
+	-- Assign a rank to each hour, partitioned by member_casual
+		ROW_NUMBER () OVER (
+			PARTITION BY member_casual
+			ORDER BY total_ride_hours DESC
+		) AS rn
+	FROM hourly_counts
+)
+-- 3. Select only the top 3 ranked hours for both rider types
+SELECT hour_of_days,
+	   member_casual,
+	   total_ride_hours,
+	   CAST(
+        100.0 * total_ride_hours
+        / SUM(total_ride_hours) OVER (PARTITION BY member_casual)
+        AS DECIMAL(5,2)
+    ) AS percent_of_rides
+FROM ranked_hours
+WHERE rn <= 3
+ORDER BY member_casual, total_ride_hours DESC;
+  ```
+
+  <img width="660" height="219" alt="image" src="https://github.com/user-attachments/assets/df1fa721-8fbf-442f-9f89-fadb1be843d0" />
+  
+  --> Both members and casual riders show peak usage between **4 PM and 6 PM**, indicating a strong late-afternoon demand period. Members are most concentrated at **5 PM (37.74%)**, reflecting post-work commuting behavior, while casual riders display a more evenly distributed pattern across these hours, suggesting more flexible and leisure-oriented usage.
+
+  **Weekly Usage Patterns**
+
+```sql
+WITH day_total_ride AS (
+SELECT
+    DATENAME(WEEKDAY, start_at) AS day_of_week,
+	member_casual,
+    COUNT(*) AS total_rides
+FROM cleaned_trips
+GROUP BY DATENAME(WEEKDAY, start_at),
+		member_casual
+)
+, 
+ranked_day_ride AS (
+	SELECT *, ROW_NUMBER () OVER (
+		PARTITION BY (member_casual)
+		ORDER BY total_rides DESC
+	) AS rn
+	FROM day_total_ride
+),
+weekly_total AS (
+    SELECT
+        member_casual,
+        SUM(total_rides) AS weekly_rides
+    FROM day_total_ride
+    GROUP BY member_casual
+)
+SELECT
+    r.day_of_week,
+    r.member_casual,
+    r.total_rides,
+    CAST(
+        100.0 * r.total_rides / w.weekly_rides
+        AS DECIMAL(5,2)
+    ) AS pct_day_over_total
+FROM ranked_day_ride r
+JOIN weekly_total w
+    ON r.member_casual = w.member_casual
+WHERE r.rn <= 3
+ORDER BY r.member_casual, r.total_rides DESC;
+  ```
+
+<img width="639" height="205" alt="image" src="https://github.com/user-attachments/assets/f233ed06-ab9b-45ac-9c21-cc05ff55aa41" />
+
+
+--> Casual riders are most active on weekends (Friday - Sunday), with Saturday **(20.63%)** and Sunday **(17.15%)** accounting for a substantial share of weekly rides. In contrast, members show peak activity on midweek days, particularly on Wednesday **(16.46%)**, Thursday **(15.41%)** and Tuesday **(15.40%)**. These findings reinforce the commuter and leisure hypothesis, suggest opportunities to tailor weekend promotions for casual riders and weekday efficiency improvements for members. 
+  
+  **Seasonal Trends**
+  **Station Hotspots**
+  **Bike Type References**
+  
   ### 5. Share:
   ### 6. Act:
