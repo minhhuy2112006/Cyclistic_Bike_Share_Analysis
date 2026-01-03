@@ -24,7 +24,7 @@
   ## Description:
   
   #### About company:
-  In 2016, Cylistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5.824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
+  In 2016, Cylistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
   
   ##### Cyclistic sets itself apart by offering:
 
@@ -241,5 +241,17 @@ DROP TABLE #files;
   ### 4. Analyze:
   **Key Findings**
   
+  **User Distribution:** 
+  - **Annual Members:** 63.58% of total rides (3,607,976 trips) 
+  - **Casual Riders:** 36.42% of total rides (2,066,306 trips)
+  ```sql
+  SELECT member_casual, 
+  COUNT(ride_id)  AS Total_Rides,
+  CAST(100.0 * COUNT(ride_id) / SUM(COUNT(ride_id)) OVER() AS decimal(5,2)) AS pct_over_total
+  FROM cleaned_trips
+  GROUP BY member_casual
+  ```
+  ****
+
   ### 5. Share:
   ### 6. Act:
