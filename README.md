@@ -238,12 +238,15 @@ DROP TABLE #files;
   ```
   **Final Dataset:** `cleaned_trips` table with 5,674,282 valid trip records
   
-  ### 4. Analyze:
+  ### 4 + 5. Analyze and Share:
+  
   **Key Findings**
   
   **User Distribution:** 
   - **Annual Members:** 63.58% of total rides (3,607,976 trips) 
   - **Casual Riders:** 36.42% of total rides (2,066,306 trips)
+
+  **SQL Code:**
   ```sql
   SELECT member_casual, 
   COUNT(ride_id)  AS Total_Rides,
@@ -251,8 +254,15 @@ DROP TABLE #files;
   FROM cleaned_trips
   GROUP BY member_casual
   ```
+  **Visualization:**
+  
+  <img width="769" height="286" alt="image" src="https://github.com/user-attachments/assets/354d7e5f-da9d-443a-9b71-e46a35e30dd2" />
+
   While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
   **Ride Duration Pattern:**
+  
+  **SQL Code:**
+  
   ```sql
   -- Average and median ride duration by user type
 -- Duration Table
@@ -284,12 +294,17 @@ FROM avg_table as a
 JOIN median_table as m
 ON a.member_casual = m.member_casual
   ```
-  **Result:**
+  **Visualization:**
   
-  <img width="511" height="98" alt="image" src="https://github.com/user-attachments/assets/28f0ef7f-5496-462d-b01f-1dd3b353c14e" />
+  <img width="701" height="757" alt="image" src="https://github.com/user-attachments/assets/afa613c4-0ca2-47c4-8749-8cf612ddcb0c" />
+
   
   --> Casual riders take loger trips (average: 21m, median: 13m) reflecting more leisure-oriented behavior. In constrast, members have shorter and more consistent ride durations (average: 12m, median: 9m) indicating frequent, purpose-driven usage.
-  **Peak Usage Times**
+  
+  **Peak Usage Times and Weekly Usage Patterns**
+
+  **Peak Usage Times SQL Code:**
+
   ```sql
 WITH hourly_counts AS (
 -- 1. Calculate the total rides per hour for each rider type
@@ -323,13 +338,7 @@ FROM ranked_hours
 WHERE rn <= 3
 ORDER BY member_casual, total_ride_hours DESC;
   ```
-  **Result:**
-  
-  <img width="660" height="219" alt="image" src="https://github.com/user-attachments/assets/df1fa721-8fbf-442f-9f89-fadb1be843d0" />
-  
-  --> Both members and casual riders show peak usage between **4 PM and 6 PM**, indicating a strong late-afternoon demand period. Members are most concentrated at **5 PM (37.74%)**, reflecting post-work commuting behavior, while casual riders display a more evenly distributed pattern across these hours, suggesting more flexible and leisure-oriented usage.
-
-  **Weekly Usage Patterns**
+  **Weekly Usage Patterns SQL Code:**
 
 ```sql
 WITH day_total_ride AS (
@@ -370,13 +379,21 @@ JOIN weekly_total w
 WHERE r.rn <= 3
 ORDER BY r.member_casual, r.total_rides DESC;
   ```
-**Result:**
-
-<img width="639" height="205" alt="image" src="https://github.com/user-attachments/assets/f233ed06-ab9b-45ac-9c21-cc05ff55aa41" />
-
-
---> Casual riders are most active on weekends (Friday - Sunday), with Saturday **(20.63%)** and Sunday **(17.15%)** accounting for a substantial share of weekly rides. In contrast, members show peak activity on midweek days, particularly on Wednesday **(16.46%)**, Thursday **(15.41%)** and Tuesday **(15.40%)**. These findings reinforce the commuter and leisure hypothesis, suggest opportunities to tailor weekend promotions for casual riders and weekday efficiency improvements for members. 
+  **Visualization:**
   
+  **Member:**
+  
+  <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/eab6029e-777d-464b-91e0-7af4f175de50" />
+
+  **Casual:**
+
+  <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/28d494ee-2b62-43c9-b816-88c945994163" />
+  
+  
+  --> The chart highlights clear differences in usage behavior between members and casual riders. Members show stable demand on weekdays, with two distinct peak periods in the morning **(7–9 AM)** and especially in the late afternoon **(4–6 PM)**, reflecting typical work–home commuting patterns. Their activity drops significantly on weekends, indicating lower reliance on bikes for leisure purposes.
+
+  In contrast, casual riders experience a strong increase in usage on weekends, while still exhibiting a clear peak during the **4–6 PM** time window, particularly from Friday to Sunday. Their usage is more evenly distributed throughout the day and less pronounced during the morning peak, suggesting that casual riders primarily use the service for leisure activities, social outings, or flexible post-work travel. These differences imply that operations should prioritize weekday peak-hour efficiency for members, while enhancing service availability and experience during weekend late-afternoon and evening periods for casual riders.
+
   **Seasonal Trends**
   ```sql
   WITH Month_total_ride AS (
@@ -413,11 +430,18 @@ ON r.member_casual = m.member_casual
 WHERE rn <= 3
 ORDER BY r.member_casual, rn;
   ```
-**Result:**
+**Visualization:**
 
-<img width="656" height="213" alt="image" src="https://github.com/user-attachments/assets/1e9e5442-1d4a-43a5-86dd-16b0aa3d418e" />
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/1c2909b7-421d-46ff-a4ba-110e3d2139ab" />
 
---> Bike-share demand peaks during the fall season (July - September), with September being the highest month for both user types. Casual riders account for a larger share of total trips accross all months. While member trips, although higher in absolute volume, are more evenly distributed throughout the year. This hightlights fall as a critical period to convert seasonal casual riders into long-term members.
+
+--> Looking at the annual timeline, both members and casual riders show increasing usage as the year moves into warmer months, followed by a sharp decline during winter. However, the way each group responds to seasonality differs significantly.
+
+For members, trip volumes remain relatively substantial even in colder months, indicating a stable baseline demand driven by routine, utilitarian travel. As conditions improve from spring through summer, total trips increase not because the purpose of use changes, but because frequency and willingness to choose biking rise, which gradually widens the gap compared to casual riders.
+
+In contrast, casual riders display a strongly seasonal pattern. Their trip volumes drop sharply in winter and increase meaningfully only during warmer months, suggesting that their usage is largely voluntary and highly dependent on favorable weather. When conditions are less suitable, demand largely disappears.
+
+Overall, the data tells a clear story: members provide year-round stability for the system, while casual riders amplify demand during peak seasons. This implies that operational and growth strategies should follow two different rhythms—ensuring consistent reliability for members throughout the year, while leveraging peak seasons to attract, engage, and potentially convert casual riders.
 
   **Station Hotspots**
   ```sql
@@ -479,10 +503,4 @@ ORDER BY member_casual, pct_within_user DESC;
 
 
   --> Both groups show a strong preference for bikes over electric scootes, with electric bikes being the most used vehicle type across both segments. Electric bikes account for roughly half of all trips for both casual **(49.64%)** and member riders **(50.39%)**, indicating broad adoption across user types. While electric scooters represent a small share overall, they are used more frequently by casual riders **(3.89%)** than member **(1.53%)** and exhibit strong seasonality, with a sharp surge in September driven primarily by casual users. This suggests that scooters are more appealing for short, spontaneous, and leisure-oriented trips, whereas members tend to rely on bikes for more regular and consistent travel.
-  ### 5. Share:
-
-  **Data Visualization**
-  
-  **Interactive DashBoard:** https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
-  
   ### 6. Act:
