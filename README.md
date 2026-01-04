@@ -451,7 +451,10 @@ ORDER BY member_casual, total_rides DESC;
 
   **Result:**
   
-  <img width="837" height="602" alt="image" src="https://github.com/user-attachments/assets/40b9ef6d-fe49-4ea3-b96a-f92aa7a78e87" />
+  <img width="700" height="450" alt="image" src="https://github.com/user-attachments/assets/febcf634-399a-445f-b34b-2c9c9c43e2bb" />
+
+
+
 
   --> Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders. **Streeter Dr & Grand Ave** leads among casual users, accounting for **2.43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions. In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1.15%**, reflecting routine, commute-driven usage patterns.
   
@@ -477,4 +480,7 @@ ORDER BY member_casual, pct_within_user DESC;
 
   --> Both groups show a strong preference for bikes over electric scootes, with electric bikes being the most used vehicle type across both segments. Electric bikes account for roughly half of all trips for both casual **(49.64%)** and member riders **(50.39%)**, indicating broad adoption across user types. While electric scooters represent a small share overall, they are used more frequently by casual riders **(3.89%)** than member **(1.53%)** and exhibit strong seasonality, with a sharp surge in September driven primarily by casual users. This suggests that scooters are more appealing for short, spontaneous, and leisure-oriented trips, whereas members tend to rely on bikes for more regular and consistent travel.
   ### 5. Share:
+
+  **Data Visualization**
+  **Interactive DashBoard:** 
   ### 6. Act:
