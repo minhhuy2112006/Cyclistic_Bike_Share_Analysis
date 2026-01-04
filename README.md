@@ -323,7 +323,8 @@ FROM ranked_hours
 WHERE rn <= 3
 ORDER BY member_casual, total_ride_hours DESC;
   ```
-
+  **Result:**
+  
   <img width="660" height="219" alt="image" src="https://github.com/user-attachments/assets/df1fa721-8fbf-442f-9f89-fadb1be843d0" />
   
   --> Both members and casual riders show peak usage between **4 PM and 6 PM**, indicating a strong late-afternoon demand period. Members are most concentrated at **5 PM (37.74%)**, reflecting post-work commuting behavior, while casual riders display a more evenly distributed pattern across these hours, suggesting more flexible and leisure-oriented usage.
@@ -369,6 +370,7 @@ JOIN weekly_total w
 WHERE r.rn <= 3
 ORDER BY r.member_casual, r.total_rides DESC;
   ```
+**Result:**
 
 <img width="639" height="205" alt="image" src="https://github.com/user-attachments/assets/f233ed06-ab9b-45ac-9c21-cc05ff55aa41" />
 
@@ -376,8 +378,102 @@ ORDER BY r.member_casual, r.total_rides DESC;
 --> Casual riders are most active on weekends (Friday - Sunday), with Saturday **(20.63%)** and Sunday **(17.15%)** accounting for a substantial share of weekly rides. In contrast, members show peak activity on midweek days, particularly on Wednesday **(16.46%)**, Thursday **(15.41%)** and Tuesday **(15.40%)**. These findings reinforce the commuter and leisure hypothesis, suggest opportunities to tailor weekend promotions for casual riders and weekday efficiency improvements for members. 
   
   **Seasonal Trends**
+  ```sql
+  WITH Month_total_ride AS (
+SELECT
+    DATENAME(MONTH, start_at) AS month_of_year,
+	member_casual,
+    COUNT(*) AS total_rides
+FROM cleaned_trips
+GROUP BY DATENAME(MONTH, start_at),
+		member_casual
+)
+, 
+ranked_MONTH_ride AS (
+	SELECT *, ROW_NUMBER () OVER (
+		PARTITION BY (member_casual)
+		ORDER BY total_rides DESC
+	) AS rn
+	FROM Month_total_ride
+)
+, monthly_total AS (
+	SELECT
+        member_casual,
+        SUM(total_rides) AS monthly_rides
+    FROM Month_total_ride
+    GROUP BY member_casual
+)
+SELECT month_of_year,
+	   r.member_casual,
+	   total_rides,
+	   CAST (100.0 * total_rides / m.monthly_rides AS DECIMAL(5,2)) AS pct_month_over_total
+FROM ranked_MONTH_ride as r
+JOIN monthly_total as m
+ON r.member_casual = m.member_casual
+WHERE rn <= 3
+ORDER BY r.member_casual, rn;
+  ```
+**Result:**
+
+<img width="656" height="213" alt="image" src="https://github.com/user-attachments/assets/1e9e5442-1d4a-43a5-86dd-16b0aa3d418e" />
+
+--> Bike-share demand peaks during the fall season (July - September), with September being the highest month for both user types. Casual riders account for a larger share of total trips accross all months. While member trips, although higher in absolute volume, are more evenly distributed throughout the year. This hightlights fall as a critical period to convert seasonal casual riders into long-term members.
+
   **Station Hotspots**
-  **Bike Type References**
+  ```sql
+-- Hotspot Usage by member and casual:
+WITH station_stats AS (
+    SELECT 
+        start_station_name,
+        member_casual,
+        COUNT(*) AS total_rides,
+        CAST(
+            100.0 * COUNT(*) 
+            / SUM(COUNT(*)) OVER (PARTITION BY member_casual)
+            AS DECIMAL(5,2)
+        ) AS pct_hotspot_location,
+        ROW_NUMBER() OVER (
+            PARTITION BY member_casual 
+            ORDER BY COUNT(*) DESC
+        ) AS rn
+    FROM cleaned_trips
+    GROUP BY start_station_name, member_casual
+)
+SELECT 
+    start_station_name,
+    member_casual,
+    total_rides,
+    pct_hotspot_location
+FROM station_stats
+WHERE rn <= 10
+ORDER BY member_casual, total_rides DESC;
+  ```
+
+  **Result:**
   
+  <img width="837" height="602" alt="image" src="https://github.com/user-attachments/assets/40b9ef6d-fe49-4ea3-b96a-f92aa7a78e87" />
+
+  --> Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders. **Streeter Dr & Grand Ave ** leads among casual users, accounting for **2.43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions. In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1.15%**, reflecting routine, commute-driven usage patterns.
+  
+  **Bike Type Preferences**
+  ```sql
+  SELECT
+    member_casual,
+    rideable_type,
+    COUNT(*) AS total_rides,
+    CAST(
+        100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY member_casual) AS decimal(5,2)
+    ) AS pct_within_user
+FROM cleaned_trips
+GROUP BY
+    member_casual,
+    rideable_type
+ORDER BY member_casual, pct_within_user DESC;
+  ```
+  **Result:**
+  
+  <img width="645" height="204" alt="image" src="https://github.com/user-attachments/assets/e11767b1-4011-448e-9fb8-ee72b821f9f7" />
+
+  --> Both groups show a strong preference for bikes over electric scootes, with electric bikes being the most used vehicle type across both segments. Electric bikes account for roughly half of all trips for both casual **(49.64%)** and member riders **(50.39%)**, indicating broad adoption across user types. While electric scooters represent a small share overall, they are used more frequently by casual riders **(3.89%)** than member **(1.53%)** and exhibit strong seasonality, with a sharp surge in September driven primarily by casual users. This suggests that scooters are more appealing for short, spontaneous, and leisure-oriented trips, whereas members tend to rely on bikes for more regular and consistent travel.
   ### 5. Share:
   ### 6. Act:
