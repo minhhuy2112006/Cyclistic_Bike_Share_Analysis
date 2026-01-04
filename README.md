@@ -472,7 +472,8 @@ ORDER BY member_casual, pct_within_user DESC;
   ```
   **Result:**
   
-  <img width="645" height="204" alt="image" src="https://github.com/user-attachments/assets/e11767b1-4011-448e-9fb8-ee72b821f9f7" />
+  <img width="736" height="637" alt="image" src="https://github.com/user-attachments/assets/ace909e2-1594-403d-876b-28b27d03da53" />
+
 
   --> Both groups show a strong preference for bikes over electric scootes, with electric bikes being the most used vehicle type across both segments. Electric bikes account for roughly half of all trips for both casual **(49.64%)** and member riders **(50.39%)**, indicating broad adoption across user types. While electric scooters represent a small share overall, they are used more frequently by casual riders **(3.89%)** than member **(1.53%)** and exhibit strong seasonality, with a sharp surge in September driven primarily by casual users. This suggests that scooters are more appealing for short, spontaneous, and leisure-oriented trips, whereas members tend to rely on bikes for more regular and consistent travel.
   ### 5. Share:
