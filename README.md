@@ -482,5 +482,7 @@ ORDER BY member_casual, pct_within_user DESC;
   ### 5. Share:
 
   **Data Visualization**
-  **Interactive DashBoard:** 
+  
+  **Interactive DashBoard:** https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
+  
   ### 6. Act:
