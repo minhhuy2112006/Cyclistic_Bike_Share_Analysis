@@ -453,7 +453,7 @@ ORDER BY member_casual, total_rides DESC;
   
   <img width="837" height="602" alt="image" src="https://github.com/user-attachments/assets/40b9ef6d-fe49-4ea3-b96a-f92aa7a78e87" />
 
-  --> Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders. **Streeter Dr & Grand Ave ** leads among casual users, accounting for **2.43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions. In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1.15%**, reflecting routine, commute-driven usage patterns.
+  --> Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders. **Streeter Dr & Grand Ave** leads among casual users, accounting for **2.43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions. In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1.15%**, reflecting routine, commute-driven usage patterns.
   
   **Bike Type Preferences**
   ```sql
