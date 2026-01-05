@@ -236,7 +236,7 @@ DROP TABLE #files;
   )
   DELETE FROM outlier
   ```
-  **Final Dataset:** `cleaned_trips` table with 5,674,282 valid trip records
+  **Final Dataset:** `cleaned_trips` table with 5.674.282 valid trip records
   
   ### 4 + 5. Analyze and Share:
   
@@ -244,8 +244,8 @@ DROP TABLE #files;
 
   <img width="150" height="90" alt="image" src="https://github.com/user-attachments/assets/b574faa5-3a49-4736-ac0e-965b23662b12" /><br><br>
   **User Distribution:** 
-  - **Annual Members:** **63.58%** of total rides (**3,607,976** trips) 
-  - **Casual Riders:** **36.42%** of total rides (**2,066,306** trips)
+  - **Annual Members:** **63,58%** of total rides (**3.607.976** trips) 
+  - **Casual Riders:** **36,42%** of total rides (**2.066.306** trips)
 
   **SQL Code:**
   ```sql
@@ -259,7 +259,10 @@ DROP TABLE #files;
   
   <img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/354d7e5f-da9d-443a-9b71-e46a35e30dd2" />
 
-  While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
+  **Insight:**
+  
+  - While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
+
   **Ride Duration Pattern:**
   
   **SQL Code:**
@@ -299,8 +302,8 @@ ON a.member_casual = m.member_casual
   
   <img width="350" height="350" alt="image" src="https://github.com/user-attachments/assets/afa613c4-0ca2-47c4-8749-8cf612ddcb0c" />
 
-  
-  --> Casual riders take loger trips (**average: 21m, median: 13m**) reflecting more leisure-oriented behavior. In constrast, members have shorter and more consistent ride durations (**average: 12m, median: 9m**) indicating frequent, purpose-driven usage.
+  **Insights:**
+  - Casual riders take loger trips (**average: 21m, median: 13m**) reflecting more leisure-oriented behavior. In constrast, members have shorter and more consistent ride durations (**average: 12m, median: 9m**) indicating frequent, purpose-driven usage.
   
   **Peak Usage Times and Weekly Usage Patterns**
 
@@ -390,10 +393,11 @@ ORDER BY r.member_casual, r.total_rides DESC;
 
   <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/28d494ee-2b62-43c9-b816-88c945994163" />
   
+  **Insights:**
   
-  --> The chart highlights clear differences in usage behavior between members and casual riders. Members show stable demand on weekdays, with two distinct peak periods in the morning **(7–9 AM)** and especially in the late afternoon **(4–6 PM)**, reflecting typical work–home commuting patterns. Their activity drops significantly on weekends, indicating lower reliance on bikes for leisure purposes.
+  - The chart highlights clear differences in usage behavior between members and casual riders. Members show stable demand on weekdays, with two distinct peak periods in the morning **(7–9 AM)** and especially in the late afternoon **(4–6 PM)**, reflecting typical work–home commuting patterns. Their activity drops significantly on weekends, indicating lower reliance on bikes for leisure purposes.
 
-  In contrast, casual riders experience a strong increase in usage on weekends, while still exhibiting a clear peak during the **4–6 PM** time window, particularly from Friday to Sunday. Their usage is more evenly distributed throughout the day and less pronounced during the morning peak, suggesting that casual riders primarily use the service for leisure activities, social outings, or flexible post-work travel. These differences imply that operations should prioritize weekday peak-hour efficiency for members, while enhancing service availability and experience during weekend late-afternoon and evening periods for casual riders.
+  - In contrast, casual riders experience a strong increase in usage on weekends, while still exhibiting a clear peak during the **4–6 PM** time window, particularly from Friday to Sunday. Their usage is more evenly distributed throughout the day and less pronounced during the morning peak, suggesting that casual riders primarily use the service for leisure activities, social outings, or flexible post-work travel. These differences imply that operations should prioritize weekday peak-hour efficiency for members, while enhancing service availability and experience during weekend late-afternoon and evening periods for casual riders.
 
   **Seasonal Trends**
   ```sql
@@ -435,54 +439,58 @@ ORDER BY r.member_casual, rn;
 
 <img width="450" height="450" alt="image" src="https://github.com/user-attachments/assets/1c2909b7-421d-46ff-a4ba-110e3d2139ab" />
 
+**Insights:**
 
---> Looking at the annual timeline, both members and casual riders show increasing usage as the year moves into warmer months, followed by a sharp decline during winter. However, the way each group responds to seasonality differs significantly.
+- Looking at the annual timeline, both members and casual riders show increasing usage as the year moves into warmer months, followed by a sharp decline during winter. However, the way each group responds to seasonality differs significantly.
 
-For members, trip volumes remain relatively substantial even in colder months, indicating a stable baseline demand driven by routine, utilitarian travel. As conditions improve from spring through summer, total trips increase not because the purpose of use changes, but because frequency and willingness to choose biking rise, which gradually widens the gap compared to casual riders.
+- For members, trip volumes remain relatively substantial even in colder months, indicating a stable baseline demand driven by routine, utilitarian travel. As conditions improve from spring through summer, total trips increase not because the purpose of use changes, but because frequency and willingness to choose biking rise, which gradually widens the gap compared to casual riders.
 
-In contrast, casual riders display a strongly seasonal pattern. Their trip volumes drop sharply in winter and increase meaningfully only during warmer months, suggesting that their usage is largely voluntary and highly dependent on favorable weather. When conditions are less suitable, demand largely disappears.
+- In contrast, casual riders display a strongly seasonal pattern. Their trip volumes drop sharply in winter and increase meaningfully only during warmer months, suggesting that their usage is largely voluntary and highly dependent on favorable weather. When conditions are less suitable, demand largely disappears.
 
-Overall, the data tells a clear story: members provide year-round stability for the system, while casual riders amplify demand during peak seasons. This implies that operational and growth strategies should follow two different rhythms-ensuring consistent reliability for members throughout the year, while leveraging peak seasons to attract, engage, and potentially convert casual riders.
+- Overall, the data tells a clear story: members provide year-round stability for the system, while casual riders amplify demand during peak seasons. This implies that operational and growth strategies should follow two different rhythms-ensuring consistent reliability for members throughout the year, while leveraging peak seasons to attract, engage, and potentially convert casual riders.
 
   **Station Hotspots**
-  ```sql
--- Hotspot Usage by member and casual:
-WITH station_stats AS (
-    SELECT 
-        start_station_name,
-        member_casual,
-        COUNT(*) AS total_rides,
-        CAST(
-            100.0 * COUNT(*) 
-            / SUM(COUNT(*)) OVER (PARTITION BY member_casual)
-            AS DECIMAL(5,2)
-        ) AS pct_hotspot_location,
-        ROW_NUMBER() OVER (
-            PARTITION BY member_casual 
-            ORDER BY COUNT(*) DESC
-        ) AS rn
-    FROM cleaned_trips
-    GROUP BY start_station_name, member_casual
-)
-SELECT 
-    start_station_name,
-    member_casual,
-    total_rides,
-    pct_hotspot_location
-FROM station_stats
-WHERE rn <= 10
-ORDER BY member_casual, total_rides DESC;
-  ```
+
+  	```sql
+	WITH station_stats AS (
+	    SELECT 
+	        start_station_name,
+	        member_casual,
+	        COUNT(*) AS total_rides,
+	        CAST(
+	            100.0 * COUNT(*) 
+	            / SUM(COUNT(*)) OVER (PARTITION BY member_casual)
+	            AS DECIMAL(5,2)
+	        ) AS pct_hotspot_location,
+	        ROW_NUMBER() OVER (
+	            PARTITION BY member_casual 
+	            ORDER BY COUNT(*) DESC
+	        ) AS rn
+	    FROM cleaned_trips
+	    GROUP BY start_station_name, member_casual
+	)
+	SELECT 
+	    start_station_name,
+	    member_casual,
+	    total_rides,
+	    pct_hotspot_location
+	FROM station_stats
+	WHERE rn <= 10
+	ORDER BY member_casual, total_rides DESC;
+	 ```
 
   **Visualization:**
   
-<img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/018f7a48-5fa3-414c-8c7c-e62a284415be" />
-&nbsp;&nbsp;&nbsp;
-<img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/c8aa1d04-d014-4a9a-9802-e57fa8cf37ae" />
+  <img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/018f7a48-5fa3-414c-8c7c-e62a284415be" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/c8aa1d04-d014-4a9a-9802-e57fa8cf37ae" />
 
 
-
-  --> Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders. **Streeter Dr & Grand Ave** leads among casual users, accounting for **2.43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions. In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1.15%**, reflecting routine, commute-driven usage patterns.
+  **Insight:**
+  
+  - Casual riders are highly concentrated at tourism and leisure-oriented stations, with a higher level of concentration compared to member riders.
+  - **Streeter Dr & Grand Ave** leads among casual users, accounting for **2,43**% of total casual trips, indicating strong demand in areas near parks, waterfronts, and major attractions.
+  - In contrast, member riders exhibit a more even distribution of trips, with no single station exceeding **1,15%**, reflecting routine, commute-driven usage patterns.
   
   **Bike Type Preferences**
   ```sql
@@ -493,17 +501,23 @@ ORDER BY member_casual, total_rides DESC;
     CAST(
         100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY member_casual) AS decimal(5,2)
     ) AS pct_within_user
-FROM cleaned_trips
-GROUP BY
+  FROM cleaned_trips
+  GROUP BY
     member_casual,
     rideable_type
-ORDER BY member_casual, pct_within_user DESC;
+  ORDER BY member_casual, pct_within_user DESC;
   ```
   **Visualization:**
   
   <img width="850" height="400" alt="image" src="https://github.com/user-attachments/assets/8e2a247b-f226-4c5e-9f2d-6b6193b44036" />
 
+  **Insights:**
+  
+- Casual users are not a weak customer segment, they are users who have not been converted at the right moment. During peak periods-especially in summer-Casual usage increases significantly, indicating a high willingness to use the service frequently, but without a strong enough incentive to commit long-term.
 
+- Members maintain stable usage throughout the year, reflecting the core value of the subscription model and highlighting a substantial conversion opportunity from the existing Casual base.
 
-  --> Both groups show a strong preference for bikes over electric scootes, with electric bikes being the most used vehicle type across both segments. Electric bikes account for roughly half of all trips for both casual **(49.64%)** and member riders **(50.39%)**, indicating broad adoption across user types. While electric scooters represent a small share overall, they are used more frequently by casual riders **(3.89%)** than member **(1.53%)** and exhibit strong seasonality, with a sharp surge in September driven primarily by casual users. This suggests that scooters are more appealing for short, spontaneous, and leisure-oriented trips, whereas members tend to rely on bikes for more regular and consistent travel.
+- Electric Bikes represent the most natural conversion channel, as Casual usage behavior in this segment is closer to that of Members compared to Classic Bikes, making it the most suitable product to drive long-term subscriptions.
+
+- Electric Scooters, despite being available only in August–September, generated approximately 80.000 Casual trips in September alone, demonstrating a strong and meaningful demand for short-term, experience-driven usage. Scooters should not be treated as a direct Member conversion channel, but rather as a top-of-funnel touchpoint that attracts and activates Casual users before guiding them toward Electric Bikes.
   ### 6. Act:
