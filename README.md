@@ -543,7 +543,7 @@ Based on the analysis, I recommend the following three-pillar marketing strategy
 
 - **Limited-time offer:** "Commuter Pass" - a discounted annual membership for riders with 3+ weekday commute rides.
 
-- **Expected Impact:**
+**Expected Impact:**
   
 Target approximately **26,5%** of the casual rider base **(~548.000 riders)** who exhibit member-like commuting behavior and high conversion potential.
   
