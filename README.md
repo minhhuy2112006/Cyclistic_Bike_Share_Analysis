@@ -520,4 +520,43 @@ ORDER BY r.member_casual, rn;
 - Electric Bikes represent the most natural conversion channel, as Casual usage behavior in this segment is closer to that of Members compared to Classic Bikes, making it the most suitable product to drive long-term subscriptions.
 
 - Electric Scooters, despite being available only in August–September, generated approximately 80.000 Casual trips in September alone, demonstrating a strong and meaningful demand for short-term, experience-driven usage. Scooters should not be treated as a direct Member conversion channel, but rather as a top-of-funnel touchpoint that attracts and activates Casual users before guiding them toward Electric Bikes.
+
   ### 6. Act:
+
+  Based on the analysis, I recommend the following three-pillar marketing strategy to convert casual riders into annual members:
+
+  **1. Targeted Messaging Campaign: "Commuter Casual"**
+
+  **Target Audience: Casual riders who:**
+
+  - Ride during weekday peak commuting hours, particularly evening commute **(4 - 6 PM)**.
+
+  - Using bikes consistently on weekdays.
+  
+  **Tactics**
+
+  - **In-app messaging:** Trigger membership benefit messages after users complete a weekday commute-pattern trip.
+
+  - **Cost Comparison Calculator:** Display potential monthly saving after 3 - 4 weekday rides.
+
+  - **Testimonials:** Feature stories from members who previously used Cyclistic for one-way commuting.
+
+  - **Limited-time offer:** "Commuter Pass" - a discounted annual membership for riders with 3+ weekday commute rides.
+
+  - **Expected impact**
+    Target approximately **26,5%** of the casual rider base **(~548.000 riders)** who exhibit member-like commuting behavior and high conversion potential.
+  **2. Seasonal Conversion Campaign: "Autumn Savings"**
+
+  **Timing:** Launch in **July**, with peak messaging in **September**
+
+  **Target Audience:** High-frequency casual riders during late summer - early fall months **(July - September)**
+
+  **Tactics:**
+  - **Early - Fall Offer:** "Lock in fall rates" with discounted membership in July - August
+  - **Ride Milestone Rewards:** "You’ve taken 10 rides this month! A membership would save you $X" **(Triggered during August – September when usage peaks)**
+  - **Weekend Explorer package:** Emphasize **unlimited weekend rides** for fall activities, events and cooler - weather commuting.
+  - **Referal Program:** Existing members receive incentives for referring casual riders during **peak September demand**.
+  **Expected Impact:**
+    Leverage peak fall ridership, especially in September, when casual rider engagement is highest and weather conditions remain favorable - maximizing conversion to membership before winter decline.
+  **3. Station-Based Geo-Targeted Campaigns**
+  - 
