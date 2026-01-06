@@ -481,9 +481,9 @@ ORDER BY r.member_casual, rn;
 
   **Visualization:**
   
-  <img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/018f7a48-5fa3-414c-8c7c-e62a284415be" />
+  <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/018f7a48-5fa3-414c-8c7c-e62a284415be" />
   &nbsp;&nbsp;&nbsp;
-  <img width="450" height="400" alt="image" src="https://github.com/user-attachments/assets/c8aa1d04-d014-4a9a-9802-e57fa8cf37ae" />
+  <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/c8aa1d04-d014-4a9a-9802-e57fa8cf37ae" />
 
 
   **Insight:**
@@ -521,42 +521,69 @@ ORDER BY r.member_casual, rn;
 
 - Electric Scooters, despite being available only in August–September, generated approximately 80.000 Casual trips in September alone, demonstrating a strong and meaningful demand for short-term, experience-driven usage. Scooters should not be treated as a direct Member conversion channel, but rather as a top-of-funnel touchpoint that attracts and activates Casual users before guiding them toward Electric Bikes.
 
-  ### 6. Act:
+### 6. Act:
 
-  Based on the analysis, I recommend the following three-pillar marketing strategy to convert casual riders into annual members:
+Based on the analysis, I recommend the following three-pillar marketing strategy to convert casual riders into annual members:
 
-  **1. Targeted Messaging Campaign: "Commuter Casual"**
+**1. Targeted Messaging Campaign: "Commuter Casual"**
 
-  **Target Audience: Casual riders who:**
+**Target Audience: Casual riders who:**
 
-  - Ride during weekday peak commuting hours, particularly evening commute **(4 - 6 PM)**.
+- Ride during weekday peak commuting hours, particularly evening commute **(4 - 6 PM)**.
 
-  - Using bikes consistently on weekdays.
+- Using bikes consistently on weekdays.
   
-  **Tactics**
+**Tactics**
 
-  - **In-app messaging:** Trigger membership benefit messages after users complete a weekday commute-pattern trip.
+- **In-app messaging:** Trigger membership benefit messages after users complete a weekday commute-pattern trip.
 
-  - **Cost Comparison Calculator:** Display potential monthly saving after 3 - 4 weekday rides.
+- **Cost Comparison Calculator:** Display potential monthly saving after 3 - 4 weekday rides.
 
-  - **Testimonials:** Feature stories from members who previously used Cyclistic for one-way commuting.
+- **Testimonials:** Feature stories from members who previously used Cyclistic for one-way commuting.
 
-  - **Limited-time offer:** "Commuter Pass" - a discounted annual membership for riders with 3+ weekday commute rides.
+- **Limited-time offer:** "Commuter Pass" - a discounted annual membership for riders with 3+ weekday commute rides.
 
-  - **Expected impact**
-    Target approximately **26,5%** of the casual rider base **(~548.000 riders)** who exhibit member-like commuting behavior and high conversion potential.
-  **2. Seasonal Conversion Campaign: "Autumn Savings"**
+- **Expected Impact:**
+  
+Target approximately **26,5%** of the casual rider base **(~548.000 riders)** who exhibit member-like commuting behavior and high conversion potential.
+  
+**2. Seasonal Conversion Campaign: "Autumn Savings"**
 
-  **Timing:** Launch in **July**, with peak messaging in **September**
+**Timing:** Launch in **July**, with peak messaging in **September**
 
-  **Target Audience:** High-frequency casual riders during late summer - early fall months **(July - September)**
+**Target Audience:** High-frequency casual riders during late summer - early fall months **(July - September)**
 
-  **Tactics:**
-  - **Early - Fall Offer:** "Lock in fall rates" with discounted membership in July - August
-  - **Ride Milestone Rewards:** "You’ve taken 10 rides this month! A membership would save you $X" **(Triggered during August – September when usage peaks)**
-  - **Weekend Explorer package:** Emphasize **unlimited weekend rides** for fall activities, events and cooler - weather commuting.
-  - **Referal Program:** Existing members receive incentives for referring casual riders during **peak September demand**.
-  **Expected Impact:**
-    Leverage peak fall ridership, especially in September, when casual rider engagement is highest and weather conditions remain favorable - maximizing conversion to membership before winter decline.
-  **3. Station-Based Geo-Targeted Campaigns**
-  - 
+**Tactics:**
+  
+- **Early - Fall Offer:** "Lock in fall rates" with discounted membership in July - August
+  
+- **Ride Milestone Rewards:** "You’ve taken 10 rides this month! A membership would save you $X" **(Triggered during August – September when usage peaks)**
+  
+- **Weekend Explorer package:** Emphasize **unlimited weekend rides** for fall activities, events and cooler - weather commuting.
+  
+- **Referal Program:** Existing members receive incentives for referring casual riders during **peak September demand**.
+  
+**Expected Impact:**
+Leverage peak fall ridership, especially in September, when casual rider engagement is highest and weather conditions remain favorable - maximizing conversion to membership before winter decline.
+
+**3. Station-Based Geo-Targeted Campaigns**
+
+**Target Audience:** High - Frequency Casual riders
+
+**Location Strategy:** Focus on top Casual-heavy stations with high repeat usage
+- Streeter Dr & Grand Ave
+- DuSable Lake Shore Dr & Monroe St
+- Michigan Ave & Oak St
+- Wells St & Concord Ln
+
+**Tactics:**
+    
+- **QR Code Signage:** Placed at high-traffic stations, linking to a Membership landing page with station-specific, personalized savings information.
+  
+- **Digital Kiosks:** Interactive kiosks at dock stations that let users input their ride frequency to see a “See Your Savings” comparison (Casual vs Member).
+  
+- **Geofenced Mobile Ads:** In-app or mobile ads shown only to users within a 0.5-mile radius of key stations.
+  
+- **Partnership Promotions:** Collaborations with nearby businesses (coffee shops, gyms, retail) to offer member-only perks, increasing the perceived value of Membership.
+  
+**Expected Impact:** These tactics are expected to increase Casual → Membership conversion by **15–25%** at key stations, while shortening time-to-convert by **20–30%** by targeting the right pricing context, location, and decision moments.
