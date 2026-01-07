@@ -3,7 +3,15 @@
 # Case Study: How does a bike-share navigate speedy success?
 
   ## Introduction:
-  Huy Nguyen performed the Cyclistic bike-share analysis case study in December 2025 as a capstone for the Google Data Analytics Certificate. In this case study, I work for a fictonal company, along with the marketing analytics team. This Analysis follow the data analysis process: ASK, PREPARE, PROCESS, ANALYZE, SHARE, ACT and used both SQL and Tableau to answer key business questions and develop data-drive recommendations between January and December in 2024.
+  Huy Nguyen performed the Cyclistic bike-share analysis case study in December 2025 as a capstone for the Google Data Analytics Certificate. In this case study, I work for a fictonal company, along with the marketing analytics team. This Analysis follow the data analysis process: 
+  - **ASK**
+  - **PREPARE**
+  - **PROCESS**
+  - **ANALYZE**
+  - **SHARE**
+  - **ACT**
+
+  Tools: used both **SQL and Tableau** to answer key business questions and develop data-drive recommendations between **January and December in 2024.**
   
   ## Scenario:
   You are a junior data analyst working on the marketing analyst team at Cyclistic, a bike-share
@@ -16,17 +24,17 @@
   
   ## Quick Link:
   
-  ##### Data Source: https://divvy-tripdata.s3.amazonaws.com/index.html
+  ##### **Data Source:** https://divvy-tripdata.s3.amazonaws.com/index.html
   
-  ##### SQL Code: https://github.com/minhhuy2112006/Cyclistic_Bike_Share_Analysis
+  ##### **SQL Code:** https://github.com/minhhuy2112006/Cyclistic_Bike_Share_Analysis
   
-  ##### Visualization: https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
+  ##### **Visualization:** https://public.tableau.com/app/profile/nguyen.huy8691/viz/CyclisticBike-ShareAnalysis2024Dashboard/CyclisticDashBoard2024?publish=yes
   ## Description:
   
   #### About company:
   In 2016, Cylistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
   
-  ##### Cyclistic sets itself apart by offering:
+  #### Cyclistic sets itself apart by offering:
 
   - Classic bike
   - Electric bike
@@ -61,7 +69,9 @@
   
   #### Data Source Description:
   **Dataset:** Cyclistic trip data for the full year 2024 (January - December).
+  
   **Source:** Divvy Bikes (Operated by Lyft), publicly available.
+  
   **Format:** 12 CSV Files (one per month), containing ride-level data.
   
   **Key Fields:**
@@ -95,6 +105,7 @@
   **1. Tool Used**
   
   **- SQL Server:** Data creation, Data cleaning and analysis.
+  
   **- Tableau:** Data visualization and Dashboard Creation
   
   **2. Organize**
@@ -159,8 +170,11 @@ DROP TABLE #files;
   ```
   
   **3. Data Cleaning**
-	In the SQL Query File database_cyclistic:
+  
+  In the SQL Query File database_cyclistic:
+  
   **Reference Tables:** 
+  
   Created tables to support handling missing values
 
   - `station_reference`: Unique stations with coordinates (longitude, latitude)
@@ -261,7 +275,7 @@ DROP TABLE #files;
 
   **Insight:**
   
-  - While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
+  While members dominate overall usage, casual riders represent a significant market segment with conversion potential.
 
   **Ride Duration Pattern:**
   
@@ -449,36 +463,35 @@ ORDER BY r.member_casual, rn;
 
 - Overall, the data tells a clear story: members provide year-round stability for the system, while casual riders amplify demand during peak seasons. This implies that operational and growth strategies should follow two different rhythms-ensuring consistent reliability for members throughout the year, while leveraging peak seasons to attract, engage, and potentially convert casual riders.
 
-  **Station Hotspots**
+**Station Hotspots**
 
-  	```sql
-	WITH station_stats AS (
-	    SELECT 
-	        start_station_name,
-	        member_casual,
-	        COUNT(*) AS total_rides,
-	        CAST(
-	            100.0 * COUNT(*) 
-	            / SUM(COUNT(*)) OVER (PARTITION BY member_casual)
-	            AS DECIMAL(5,2)
-	        ) AS pct_hotspot_location,
-	        ROW_NUMBER() OVER (
-	            PARTITION BY member_casual 
-	            ORDER BY COUNT(*) DESC
-	        ) AS rn
-	    FROM cleaned_trips
-	    GROUP BY start_station_name, member_casual
+```sql
+WITH station_stats AS (
+SELECT 
+	start_station_name,
+	member_casual,
+	COUNT(*) AS total_rides,
+    CAST(
+		100.0 * COUNT(*)
+		/ SUM(COUNT(*)) OVER (PARTITION BY member_casual)
+		AS DECIMAL(5,2)
+	) AS pct_hotspot_location,
+	ROW_NUMBER() OVER (
+		PARTITION BY member_casual 
+		ORDER BY COUNT(*) DESC
+	) AS rn
+	FROM cleaned_trips
+	GROUP BY start_station_name, member_casual
 	)
-	SELECT 
-	    start_station_name,
-	    member_casual,
-	    total_rides,
-	    pct_hotspot_location
-	FROM station_stats
-	WHERE rn <= 10
-	ORDER BY member_casual, total_rides DESC;
-	 ```
-
+SELECT 
+	start_station_name,
+	member_casual,
+	total_rides,
+	pct_hotspot_location
+FROM station_stats
+WHERE rn <= 10
+ORDER BY member_casual, total_rides DESC;
+  ```
   **Visualization:**
   
   <img width="400" height="400" alt="image" src="https://github.com/user-attachments/assets/018f7a48-5fa3-414c-8c7c-e62a284415be" />
